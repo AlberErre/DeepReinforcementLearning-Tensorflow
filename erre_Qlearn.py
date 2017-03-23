@@ -32,8 +32,16 @@ class erre_QLearning:
     def obtain_q(self, state, action):
         current_q = self.q_matrix.get((state, action), 0.0)
         return current_q # 0.0 is the default value for each (state, value) pair
-
-
+    
+    def update_q(self, reward, state, action, target_q):
+        last_q = self.q_matrix.get((state, action), 0.0)
+        if last_q is 0.0:
+            self.q_matrix[(state, action)] = reward # This is to initialize 
+            # in case it is the first one (first line in the slides, week4)
+        else:
+        	self.q_matrix[(state, action)] = last_q + self.alpha * (target_q - last_q)
+            # This is the update rule :D
+            # Con esto actualizamos las q, entenderlo bien, muy importante
 
 ###################################
 # MAIN ALGORITHM STRUCTURE
