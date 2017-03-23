@@ -27,8 +27,11 @@ class erre_QLearning:
         self.alpha = alpha # Learning rate
         self.epsilon = epsilon
         self.gamma = gamma  # discount
-        self.policy = policy # number of possible actions
-
+        self.policy = policy # number of possible actio
+        
+    def __str__(self):
+        return str(self.q_matrix) # This is to see the Q matrix (dictionary) 
+    
     def obtain_q(self, state, action):
         current_q = self.q_matrix.get((state, action), 0.0)
         return current_q # 0.0 is the default value for each (state, value) pair
