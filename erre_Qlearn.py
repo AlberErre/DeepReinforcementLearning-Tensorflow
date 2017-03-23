@@ -50,6 +50,9 @@ class erre_QLearning:
 def create_state(features):
     return int("".join(map(lambda feature: str(int(feature)), features)))
 
+def to_bin(value, bins): # number of slides/pieces we divide the continuous environment
+    return numpy.digitize(x=[value], bins=bins)[0]
+
 ###################################
 # MAIN ALGORITHM STRUCTURE
 
