@@ -46,6 +46,10 @@ class erre_QLearning:
             # This is the update rule :D
             # Con esto actualizamos las q, entenderlo bien, muy importante
 
+# Create state in the environment and bins (slides):
+def create_state(features):
+    return int("".join(map(lambda feature: str(int(feature)), features)))
+
 ###################################
 # MAIN ALGORITHM STRUCTURE
 
