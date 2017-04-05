@@ -90,7 +90,7 @@ if __name__ == '__main__':
     erre_Qlearning = erre_QLearning(policy=range(env.action_space.n),
                                     alpha=0.5, 
                                     gamma=0.9, # if this is low, it takes a LOT of time to finish 100 iterations - the higher the better
-                                    epsilon=0.1)
+                                    epsilon=0.9)
 
     for i_episode in range(100): # number of iterations - change also x_axis!!
 
