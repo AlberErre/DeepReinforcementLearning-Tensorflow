@@ -45,6 +45,30 @@ class erre_QLearning:
         	self.q_matrix[(state, action)] = last_q + self.alpha * (target_q - last_q)
             # This is the update rule :D
             # Con esto actualizamos las q, entenderlo bien, muy importante
+            
+    def pick_action(self, state, return_q = False):
+        q_matrix = [self.obtain_q(state, action) for action in self.policy]
+        q_max_value = max(q_matrix)
+
+        if random.random() < self.epsilon:
+            q_min_value = min(q_matrix); mag = max(abs(q_min_value), abs(q_max_value))
+            # add random values to all the actions, recalculate maxQ
+            q_matrix = [q_matrix[i] + random.random() * mag - .5 * mag for i in range(len(self.policy))]
+            q_max_value = max(q_matrix)
+
+        n_max = q_matrix.count(q_max_value)
+        if n_max > 1: # in case of conflict, select one randomly
+            best = [i for i in range(len(self.policy)) if q_matrix[i] == q_max_value]
+            i = random.choice(best)
+        else:
+            i = q_matrix.index(q_max_value)
+            # This selects the best possible action {0,1,2}
+            # regarding the max value in the Q matrix --> max(q_matrix)
+
+        action = self.policy[i]
+        if return_q:
+            return action, q_matrix
+        return action
 
 # Create state in the environment and bins (slides):
 def create_state(features):
